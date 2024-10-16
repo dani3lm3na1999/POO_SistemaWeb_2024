@@ -13,15 +13,20 @@ def inicio(request):
 
 def productos(request):
 
-    productos = {}
+    productos = []
 
-    for i in range(2):
+    for i in range(5):
         producto = {
             "nombre": "Coca-Cola",
             "precio": 0.75,
             "cantidad": 24
         }
+        productos.append(producto)
 
-        productos.update(producto)
+    # Diccionario es una colleción de clave, valor
+    contexto = {
+        "productos": productos,
+        "usuario": "Francisco Peñate"
+    }
 
-    return render(request, 'pages/productos.html', {'productos': productos})
+    return render(request, 'pages/productos.html', contexto)
