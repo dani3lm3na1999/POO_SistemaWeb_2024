@@ -2,6 +2,8 @@ from django.shortcuts import render
 # Importamos HttpResponse
 from django.http import HttpResponse
 
+usuario = "Francisco Daniel Peñate"
+
 # Create your views here.
 def hola_mundo(request):
     # Devolvemos un hola mundo a través de un encabezado h1
@@ -9,7 +11,14 @@ def hola_mundo(request):
 
 # Crear vista principal
 def inicio(request):
-    return render(request, 'pages/index.html')
+    autenticado = False
+    
+    contexto = {
+        "esta_autenticado": autenticado,
+        "user": usuario
+    }
+    return render(request, 'pages/index.html', contexto)
+
 
 def productos(request):
 
@@ -19,6 +28,7 @@ def productos(request):
         producto = {
             "nombre": "Coca-Cola",
             "precio": 0.75,
+            "iva": 0.75*0.13,
             "cantidad": 24
         }
         productos.append(producto)
@@ -26,7 +36,7 @@ def productos(request):
     # Diccionario es una colleción de clave, valor
     contexto = {
         "productos": productos,
-        "usuario": "Francisco Peñate"
+        "user": usuario
     }
 
     return render(request, 'pages/productos.html', contexto)
