@@ -9,5 +9,19 @@ def hola_mundo(request):
 
 # Crear vista principal
 def inicio(request):
-    return render(request, 'base.html')
+    return render(request, 'pages/index.html')
 
+def productos(request):
+
+    productos = {}
+
+    for i in range(2):
+        producto = {
+            "nombre": "Coca-Cola",
+            "precio": 0.75,
+            "cantidad": 24
+        }
+
+        productos.update(producto)
+
+    return render(request, 'pages/productos.html', {'productos': productos})
