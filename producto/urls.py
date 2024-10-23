@@ -5,5 +5,7 @@ from producto import views
 
 urlpatterns = [
    path('', views.inicio, name="index"),
-   path('productos/', views.productos, name="productos")
+   path('productos/', views.ProductoListView.as_view(), name="productos"),
+   path('productos/nuevo', views.ProductoCreateView.as_view(), name="producto_create"),
+   path('productos/<int:pk>/editar', views.ProductoUpdateView.as_view(), name="producto_update")
 ]

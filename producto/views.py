@@ -1,6 +1,14 @@
 from django.shortcuts import render
 # Importamos HttpResponse
 from django.http import HttpResponse
+# Importar nuestro modelo
+from .models import Productos
+# Importar las vistas genéricas CRUD (Create, Read, Update, Delete)
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+# Importamos reverse_lazy desde Url
+from django.urls import reverse_lazy
+# Importamos nuestro formulario
+from .forms import ProductosForm
 
 usuario = "Francisco Daniel Peñate"
 
@@ -19,24 +27,45 @@ def inicio(request):
     }
     return render(request, 'pages/index.html', contexto)
 
+# Crear vistas genéricas
 
-def productos(request):
+# Crear una vista para el listado de productos
+class ProductoListView(ListView):
+    model = Productos
+    template_name = "pages/producto_list.html"
+    context_object_name = "productos"
 
-    productos = []
+# Crear una vista para guardar un producto
+class ProductoCreateView(CreateView):
+    model = Productos
+    form_class = ProductosForm
+    template_name = "pages/producto_form.html"
+    success_url = reverse_lazy('productos')
 
-    for i in range(5):
-        producto = {
-            "nombre": "Coca-Cola",
-            "precio": 0.75,
-            "iva": 0.75*0.13,
-            "cantidad": 24
-        }
-        productos.append(producto)
+# Crar una vista para actualizar un producto
+class ProductoUpdateView(UpdateView):
+    model = Productos
+    form_class = ProductosForm
+    template_name = "pages/producto_form.html"
+    success_url = reverse_lazy('productos')
 
-    # Diccionario es una colleción de clave, valor
-    contexto = {
-        "productos": productos,
-        "user": usuario
-    }
+# def productos(request):
 
-    return render(request, 'pages/productos.html', contexto)
+#     productos = []
+
+#     for i in range(5):
+#         producto = {
+#             "nombre": "Coca-Cola",
+#             "precio": 0.75,
+#             "iva": 0.75*0.13,
+#             "cantidad": 24
+#         }
+#         productos.append(producto)
+
+#     # Diccionario es una colleción de clave, valor
+#     contexto = {
+#         "productos": productos,
+#         "user": usuario
+#     }
+
+#     return render(request, 'pages/productos.html', contexto)
