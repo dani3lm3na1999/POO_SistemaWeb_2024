@@ -1,6 +1,8 @@
 from django.shortcuts import render
 # Importamos HttpResponse
 from django.http import HttpResponse
+# Importamos Productos
+from .models import Productos
 
 # Create your views here.
 def hola_mundo(request):
@@ -11,3 +13,8 @@ def hola_mundo(request):
 def inicio(request):
     return render(request, 'base.html')
 
+# Crear vista home
+def listado_productos(request):
+
+    productos = Productos.objects.all()
+    return render(request, 'productos.html', {'productos': productos })
