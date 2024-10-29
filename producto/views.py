@@ -1,8 +1,16 @@
 from django.shortcuts import render
 # Importamos HttpResponse
 from django.http import HttpResponse
-# Importamos Productos
+# Importar nuestro modelo
 from .models import Productos
+# Importar las vistas genéricas CRUD (Create, Read, Update, Delete)
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+# Importamos reverse_lazy desde Url
+from django.urls import reverse_lazy
+# Importamos nuestro formulario
+from .forms import ProductosForm
+
+usuario = "Francisco Daniel Peñate"
 
 # Create your views here.
 def hola_mundo(request):
@@ -11,10 +19,32 @@ def hola_mundo(request):
 
 # Crear vista principal
 def inicio(request):
-    return render(request, 'base.html')
+    autenticado = False
+    
+    contexto = {
+        "esta_autenticado": autenticado,
+        "user": usuario
+    }
+    return render(request, 'pages/index.html', contexto)
 
-# Crear vista home
-def listado_productos(request):
+# Crear vistas genéricas
 
-    productos = Productos.objects.all()
-    return render(request, 'productos.html', {'productos': productos })
+# Crear una vista para el listado de productos
+class ProductoListView(ListView):
+    model = Productos
+    template_name = "pages/producto_list.html"
+    context_object_name = "productos"
+
+# Crear una vista para guardar un producto
+class ProductoCreateView(CreateView):
+    model = Productos
+    form_class = ProductosForm
+    template_name = "pages/producto_form.html"
+    success_url = reverse_lazy('productos')
+
+# Crar una vista para actualizar un producto
+class ProductoUpdateView(UpdateView):
+    model = Productos
+    form_class = ProductosForm
+    template_name = "pages/producto_form.html"
+    success_url = reverse_lazy('productos')
