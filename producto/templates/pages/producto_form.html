@@ -5,8 +5,14 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <div class="card w-50">
-                <div class="card-title">
-                    <h2 class="text-center">Guardar Productos</h2>
+                <div class="card-header">
+                    <h2 class="card-title text-center">
+                        {% if form.instance.ProductoId %}
+                            Editar Producto
+                        {% else %}
+                            Guardar Producto
+                        {% endif %}
+                    </h2>
                 </div>
                 <form method="post">
                     <div class="card-body">

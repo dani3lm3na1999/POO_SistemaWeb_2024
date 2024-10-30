@@ -42,30 +42,23 @@ class ProductoCreateView(CreateView):
     template_name = "pages/producto_form.html"
     success_url = reverse_lazy('productos')
 
-# Crar una vista para actualizar un producto
+# Crear una vista para actualizar un producto
 class ProductoUpdateView(UpdateView):
     model = Productos
     form_class = ProductosForm
     template_name = "pages/producto_form.html"
     success_url = reverse_lazy('productos')
 
-# def productos(request):
+# Crear una vista para obtener el detalle de un producto
+class ProductoDetailView(DetailView):
+    model = Productos
+    template_name = "pages/producto_detail.html"
+    context_object_name = "producto"
 
-#     productos = []
+# Crear una vista para eliminar un producto
+class ProductoDeleteView(DeleteView):
+    model = Productos
+    template_name = "pages/producto_delete.html"
+    context_object_name = "producto"
+    success_url = reverse_lazy('productos')
 
-#     for i in range(5):
-#         producto = {
-#             "nombre": "Coca-Cola",
-#             "precio": 0.75,
-#             "iva": 0.75*0.13,
-#             "cantidad": 24
-#         }
-#         productos.append(producto)
-
-#     # Diccionario es una colleción de clave, valor
-#     contexto = {
-#         "productos": productos,
-#         "user": usuario
-#     }
-
-#     return render(request, 'pages/productos.html', contexto)

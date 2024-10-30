@@ -10,7 +10,7 @@
               <a class="btn btn-primary" href="{% url 'producto_create' %}">Agregar Producto</a>
             </div>
             <hr>
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">Nombre</th>
@@ -22,11 +22,11 @@
                   {% for producto in productos %}  
                   <tr>
                     <td>{{ producto.Nombre }}</td>
-                    <td>{{ producto.Precio|floatformat:2 }}</td>
+                    <td>$ {{ producto.Precio|floatformat:2 }}</td>
                     <td>
-                      <a class="btn btn-info" href="#">Detalles</a>
+                      <a class="btn btn-info" href="{% url 'producto_detail' producto.ProductoId %}">Detalles</a>
                       <a class="btn btn-warning" href="{% url 'producto_update' producto.ProductoId %}">Editar</a>
-                      <a class="btn btn-danger" href="#">Eliminar</a>
+                      <a class="btn btn-danger" href="{% url 'producto_delete' producto.ProductoId %}">Eliminar</a>
                     </td>
                   </tr>
                   {% endfor %}
