@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 # Importamos la libreria PyMySql
-import pymysql
+# import pymysql
+
 # Importar config de la libreria decouple
 from decouple import config
 # Importar la libreria os
 import os
 
-pymysql.install_as_MySQLdb()
+# pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,14 +83,25 @@ WSGI_APPLICATION = 'sistema.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': config('MYSQL_DATABASE'),
+#         'HOST': config('MYSQLHOST'),
+#         'PORT': config('MYSQLPORT'),
+#         'USER': config('MYSQLUSER'),
+#         'PASSWORD': config('MYSQLPASSWORD')
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DATABASE'),
-        'HOST': config('MYSQLHOST'),
-        'PORT': config('MYSQLPORT'),
-        'USER': config('MYSQLUSER'),
-        'PASSWORD': config('MYSQLPASSWORD')
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dbtienda_s0co',
+        'HOST': 'dpg-cslcsvjtq21c73egq8e0-a',
+        'PORT': '5432',
+        'USER': 'root',
+        'PASSWORD': 'Kli7uiGY99G5gHoHWUlITT6LoKfsqcgc'
     }
 }
 
