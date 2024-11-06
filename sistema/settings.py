@@ -84,12 +84,12 @@ WSGI_APPLICATION = 'sistema.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': config('DB_ENGINE'),
-        'NAME': config('DB_NAME'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD')
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('MYSQL_DATABASE'),
+        'HOST': config('MYSQLHOST'),
+        'PORT': config('MYSQLPORT'),
+        'USER': config('MYSQLUSER'),
+        'PASSWORD': config('MYSQLPASSWORD')
     }
 }
 
