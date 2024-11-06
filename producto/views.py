@@ -20,10 +20,18 @@ def hola_mundo(request):
 # Crear vista principal
 def inicio(request):
     autenticado = False
+
+    # Mi variables productos
+    productos =  Productos.objects.all().order_by("-ProductoId") # [{},{}]
+
+    # Devolver el producto con menor stock (existencia/cantidad)
+    producto = Productos.objects.filter(Cantidad__lt=5).order_by("Cantidad").first()
     
     contexto = {
         "esta_autenticado": autenticado,
-        "user": usuario
+        "user": usuario,
+        "productos": productos,
+        "low_stock_count": producto.Nombre
     }
     return render(request, 'pages/index.html', contexto)
 
